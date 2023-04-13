@@ -1,0 +1,35 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Elemanlar
+{
+    public partial class VeriGoruntule : Form
+    {
+        public VeriGoruntule(String renk)
+        {
+            InitializeComponent();
+            labelGelen.Text = renk;
+        }
+
+        private void buttonDiger_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBoxKDV_CheckedChanged(object sender, EventArgs e)
+        {
+double toplam=Convert.ToDouble(textBoxAcilisTutari.Text);   
+            if(checkBoxBaslangic.Checked) { 
+                toplam += 100; 
+            } 
+            if(checkBoxKDV.Checked) { toplam *= 1.18; }
+            if(checkBoxOIV.Checked) { toplam *= 1.25; }
+            textBoxSonuc.Text=toplam.ToString();
+        }
