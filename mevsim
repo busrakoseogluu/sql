@@ -1,0 +1,63 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Elemanlar
+{
+    public partial class Mevsimler : Form
+    {
+        public Mevsimler()
+        {
+            InitializeComponent();
+        }
+
+        private void radioButtonKis_CheckedChanged(object sender, EventArgs e)
+        {
+            pictureBoxKis.Visible = true;
+            pictureBoxIlkbahar.Visible = false;
+            pictureBoxYaz.Visible = false;
+            pictureBoxSonbahar.Visible = false;
+        }
+
+        private void radioButtonIlkbahar_CheckedChanged(object sender, EventArgs e)
+        {
+            pictureBoxIlkbahar.Visible = true;
+            pictureBoxKis.Visible = false;
+
+            pictureBoxYaz.Visible = false;
+            pictureBoxSonbahar.Visible = false;
+        }
+
+        private void radioButtonYaz_CheckedChanged(object sender, EventArgs e)
+        {
+            pictureBoxYaz.Visible = true;
+            pictureBoxKis.Visible = false;
+            pictureBoxIlkbahar.Visible = false;
+
+            pictureBoxSonbahar.Visible = false;
+        }
+
+        private void radioButtonSonbahar_CheckedChanged(object sender, EventArgs e)
+        {
+            pictureBoxSonbahar.Visible = true;
+            pictureBoxKis.Visible = false;
+            pictureBoxIlkbahar.Visible = false;
+            pictureBoxYaz.Visible = false;
+
+        }
+
+        private void Ortak(object sender, EventArgs e)
+        {
+            pictureBoxIlkbahar.Visible = radioButtonIlkbahar.Checked;
+            pictureBoxYaz.Visible = radioButtonYaz.Checked;
+            pictureBoxSonbahar.Visible = radioButtonSonbahar.Checked;
+            pictureBoxKis.Visible = radioButtonKis.Checked;
+        }
+    }
+}
