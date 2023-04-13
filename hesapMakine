@@ -1,0 +1,87 @@
+namespace HesapMakinası
+{
+    public partial class Form1 : Form
+    {
+        bool optDurum = false;
+        double sonuc = 0;
+        string opt = "";
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+
+        private void RakamOlay(object sender, EventArgs e)
+        {
+            if (textBoxSonuc.Text == "0" || optDurum)
+                textBoxSonuc.Clear();
+            optDurum = false;
+            Button btn = (Button)sender;
+            textBoxSonuc.Text += btn.Text;
+        }
+
+        private void OptHesap(object sender, EventArgs e)
+        {
+            optDurum = true;
+            Button btn = (Button)sender;
+            String yeniOpt = btn.Text;
+            labelSonuc.Text = labelSonuc.Text + " " + textBoxSonuc.Text + " " + yeniOpt;
+            switch (opt)
+            {
+                case "+": textBoxSonuc.Text = (sonuc + Double.Parse(textBoxSonuc.Text)).ToString(); break;
+                case "-": textBoxSonuc.Text = (sonuc - Double.Parse(textBoxSonuc.Text)).ToString(); break;
+                case "*": textBoxSonuc.Text = (sonuc * Double.Parse(textBoxSonuc.Text)).ToString(); break;
+                case "/":
+                    textBoxSonuc.Text = (sonuc / Double.Parse(textBoxSonuc.Text)).ToString(); break;           
+            }
+            sonuc = Double.Parse(textBoxSonuc.Text);
+            textBoxSonuc.Text = sonuc.ToString();
+            opt = yeniOpt;
+        }
+
+        private void buttonCE_Click(object sender, EventArgs e)
+        {
+            textBoxSonuc.Text = "0";
+        }
+
+        private void buttonC_Click(object sender, EventArgs e)
+        {
+            textBoxSonuc.Text = "0";
+            labelSonuc.Text = "";
+            opt = "";
+            optDurum = false;
+            sonuc = 0;
+        }
+
+        private void buttonEsit_Click(object sender, EventArgs e)
+        {
+            labelSonuc.Text = "";
+            optDurum = true;
+            switch (opt)
+            {
+                case "+": textBoxSonuc.Text = (sonuc + Double.Parse(textBoxSonuc.Text)).ToString(); break;
+                case "-": textBoxSonuc.Text = (sonuc - Double.Parse(textBoxSonuc.Text)).ToString(); break;
+                case "*": textBoxSonuc.Text = (sonuc * Double.Parse(textBoxSonuc.Text)).ToString(); break;
+                case "/":
+                    textBoxSonuc.Text = (sonuc / Double.Parse(textBoxSonuc.Text)).ToString(); break;
+
+            }
+            sonuc = Double.Parse(textBoxSonuc.Text);
+            textBoxSonuc.Text = sonuc.ToString();
+            opt = "";
+        }
+
+        private void buttonVirgul_Click(object sender, EventArgs e)
+        {
+            if (textBoxSonuc.Text == "0")
+            {
+                textBoxSonuc.Text = "0";
+            } else if (optDurum) { textBoxSonuc.Text = "0"; }
+            if (!textBoxSonuc.Text.Contains(","))
+            {
+                textBoxSonuc.Text += ",";
+            }
+            optDurum = false;
+        }
+    }
+}
