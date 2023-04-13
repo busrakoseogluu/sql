@@ -1,0 +1,105 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Listeler
+{
+    public partial class Form2 : Form
+    {
+        DataTable tablo = new DataTable();
+        public Form2()
+        {
+            InitializeComponent();
+        }
+
+        private void buttonEkle_Click(object sender, EventArgs e)
+        {
+            tablo.Rows.Add(textBox1.Text, textBox2.Text, textBox3.Text);
+            dataGridView1.DataSource = tablo;
+            renklendirme();
+        }
+
+        private void buttonSil_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                dataGridView1.Rows.RemoveAt(dataGridView1.SelectedRows[0].Index);
+            }
+            else
+            {
+                MessageBox.Show("Lüffen silinecek satırı seçin.");
+            }
+        }
+        public void renklendirme()
+        {
+            for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
+            {
+                Application.DoEvents();
+                // Math.DivRem(i, 2, out sayi);
+                DataGridViewCellStyle renk = new DataGridViewCellStyle();
+                if (Convert.ToInt32(dataGridView1.Rows[i].Cells["TUTAR"].Value) > 1000)
+                {
+                    renk.BackColor = Color.YellowGreen;
+                }
+                else if (Convert.ToInt32(dataGridView1.Rows[i].Cells["TUTAR"].Value) > 50)
+                {
+                    renk.BackColor = Color.Orange;
+                }
+                else if (Convert.ToInt32(dataGridView1.Rows[i].Cells["TUTAR"].Value) > 0)
+                {
+                    renk.BackColor = Color.Red;
+                    renk.ForeColor = Color.White;
+                }
+                dataGridView1.Rows[i].DefaultCellStyle = renk;
+            }
+        }
+        private void Form2_Load(object sender, EventArgs e)
+        {
+            tablo.Columns.Add("ID", typeof(int));
+            tablo.Columns.Add("GİDER", typeof(string));
+            tablo.Columns.Add("TUTAR", typeof(int));
+            dataGridView1.DataSource = tablo;
+            dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Tahoma", 10F, FontStyle.Bold);
+
+        }
+
+        private void textBoxAranan_TextChanged(object sender, EventArgs e)
+        {
+            string aranan = textBoxAranan.Text.Trim().ToUpper();
+            if (aranan.Length==0 ) { renklendirme(); }
+            for (int i = 0; i <= dataGridView1.Rows.Count - 1; i++)
+            {
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    foreach (DataGridViewCell cell in dataGridView1.Rows[i].Cells)
+                    {
+                        if (cell.Value != null)
+                        {
+                            if (cell.Value.ToString().ToUpper() == aranan)
+                            {
+                                cell.Style.BackColor = Color.DarkTurquoise;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void buttonToplam_Click(object sender, EventArgs e)
+        {
+            int toplam = 0;
+            for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
+                toplam += Convert.ToInt32(dataGridView1.Rows[i].Cells["TUTAR"].Value);
+            textBoxToplam.Text = toplam.ToString();
+        }
+    }
+}
+
