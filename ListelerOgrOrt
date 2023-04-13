@@ -1,0 +1,152 @@
+using System;
+using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+
+namespace Listeler
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        string[] ogrenciler = new string[10];
+        byte[] ortalamalar = new byte[10];
+        int index = 0;
+        private void buttonEkle_Click(object sender, EventArgs e)
+        {
+            ogrenciler[index] = txtOgrenciAd.Text;
+            byte vn = Convert.ToByte(txtvize.Text);
+            byte fn = Convert.ToByte(txtFinal.Text);
+            ortalamalar[index] = ((byte)(vn * 0.4 + fn * 0.6));
+            lstOgrenciler.Items.Add(ogrenciler[index] + "\t" + ortalamalar[index]);
+            index++;
+            if (index == 10)
+            {
+                buttonEkle.Enabled = false;
+            }
+        }
+
+        private void buttonTakdirListesi_Click(object sender, EventArgs e)
+        {
+            lstOgrenciler.Items.Clear();
+            for (int i = 0; i < ogrenciler.Length; i++)
+            {
+                if (ortalamalar[i] >= 85 && ortalamalar[i] <= 100)
+                {
+                    lstOgrenciler.Items.Add(ogrenciler[i] + "\t" + ortalamalar[i]);
+                }
+            }
+        }
+
+        private void buttonTesekkurListesi_Click(object sender, EventArgs e)
+        {
+            lstOgrenciler.Items.Clear();
+            for (int i = 0; i < ogrenciler.Length; i++)
+            {
+                if (ortalamalar[i] >= 70 && ortalamalar[i] < 85)
+                {
+                    lstOgrenciler.Items.Add(ogrenciler[i] + "\t" + ortalamalar[i]);
+                }
+            }
+        }
+
+        private void buttonGecenListesi_Click(object sender, EventArgs e)
+        {
+            lstOgrenciler.Items.Clear();
+            for (int i = 0; i < ogrenciler.Length; i++)
+            {
+                if (ortalamalar[i] >= 50)
+                {
+                    lstOgrenciler.Items.Add(ogrenciler[i] + "\t" + ortalamalar[i]);
+                }
+            }
+        }
+
+        private void buttonKalanListesi_Click(object sender, EventArgs e)
+        {
+            lstOgrenciler.Items.Clear();
+            for (int i = 0; i < ogrenciler.Length; i++)
+            {
+                if (ortalamalar[i] < 50)
+                {
+                    lstOgrenciler.Items.Add(ogrenciler[i] + "\t" + ortalamalar[i]);
+                }
+            }
+        }
+
+        private void buttonTumunuListele_Click(object sender, EventArgs e)
+        {
+            lstOgrenciler.Items.Clear();
+            for (int i = 0; i < ogrenciler.Length; i++)
+            {
+                lstOgrenciler.Items.Add(ogrenciler[i] + "\t" + ortalamalar[i]);
+            }
+        }
+
+        private void buttonSilme_Click(object sender, EventArgs e)
+        {
+            lstOgrenciler.Items.Remove(lstOgrenciler.SelectedItem);
+        }
+
+        private void buttonSilmeIndex_Click(object sender, EventArgs e)
+        {
+            int secili = lstOgrenciler.SelectedIndex;
+            lstOgrenciler.Items.RemoveAt(secili);
+        }
+
+        private void buttonTemizle_Click(object sender, EventArgs e)
+        {
+            txtOgrenciAd.Clear();
+            txtvize.Clear();
+            txtFinal.Clear();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            lstOgrenciler.SelectionMode = SelectionMode.MultiSimple;  // yapılabilmesi için
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            listBoxSecilen.Items.Clear();
+            for (int i = 0; i < lstOgrenciler.SelectedIndices.Count; i++)
+            {
+                //Seçili elemanı ikinci listeye ekle
+                listBoxSecilen.Items.Add(lstOgrenciler.SelectedItems[i]);
+            }
+        }
+
+        private void buttonSilerekEkle_Click(object sender, EventArgs e)
+        {
+            for (int i = lstOgrenciler.SelectedIndices.Count - 1; i >= 0; i--)
+            {
+                listBoxSecilen.Items.Add(lstOgrenciler.SelectedItems[i]);
+                //seçili elemanı birinci listeden çıkar
+                lstOgrenciler.Items.RemoveAt(lstOgrenciler.SelectedIndices[i]);
+            }
+        }
+
+        private void listeArama_TextChanged(object sender, EventArgs e)
+        {
+            //listeArama.Text = listeArama.Text.ToUpper();
+            listeArama.SelectionStart = listeArama.Text.Length;
+            for (int i = 0; i < lstOgrenciler.Items.Count; i++)
+            {
+                if (lstOgrenciler.Items[i].ToString().Contains(listeArama.Text))
+                {
+                    lstOgrenciler.SetSelected(i, true);
+                    if (listeArama.Text == "")
+                    {
+                        lstOgrenciler.SetSelected(i, false);
+                    }
+                }
+                else
+                {
+                    lstOgrenciler.SetSelected(i, false);
+                }
+            }
+        }
+    }
+}
