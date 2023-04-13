@@ -1,0 +1,117 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Listeler
+{
+    public partial class Bilgiler : Form
+    {
+        public Bilgiler()
+        {
+            InitializeComponent();
+        }
+
+        private void buttonYeniKayit_Click(object sender, EventArgs e)
+        {
+            int islemSonuc = yeniMusteriEkle(new Musteri()
+            {
+                Id = Guid.NewGuid(),
+                isim = textBoxISim.Text,
+                soyad = textBoxSoyad.Text,
+                email = textBoxMail.Text,
+                telefon = textBoxTelefon.Text
+            });
+            if (islemSonuc > 0)
+            {
+                DialogResult res = MessageBox.Show("Müşteri ekleme başarılı\n" +
+                    "Kişi sayısını görecekmisiniz", "Bilgilendirme",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (res == DialogResult.Yes)
+                {
+                    bildirimCubugu = new NotifyIcon();
+                    bildirimCubugu.BalloonTipText = "Müsteri adet bilgisi" + Databases.musteriler.Count.ToString();
+                    bildirimCubugu.BalloonTipTitle = "Kayıt sayısı";
+                    bildirimCubugu.Visible = true;
+                    bildirimCubugu.Icon = SystemIcons.Information;
+                    bildirimCubugu.ShowBalloonTip(1000);
+                }
+                else if (res == DialogResult.No)
+                {
+
+                }
+                EkranaListele();
+                EkranıTemizle();
+            }
+            else
+            {
+                MessageBox.Show("KAyıt yapılamadı");
+            }
+        }
+
+        private void EkranıTemizle()
+        {
+            textBoxISim.Text = string.Empty;
+            textBoxSoyad.Text = string.Empty;
+            textBoxMail.Text = string.Empty;
+            textBoxTelefon.Text = string.Empty;
+        }
+
+        private void EkranaListele()
+        {
+            listBoxMusteriler.Items.Clear();
+
+            foreach (var musteri in Databases.musteriler)
+            {
+                listBoxMusteriler.Items.Add(musteri.Id + " - " + musteri.isim + " " + musteri.soyad + " " + musteri.telefon + " " + musteri.email);
+            }
+        }
+
+        private int yeniMusteriEkle(Musteri musteri)
+        {
+            Databases.musteriler.Add(musteri);
+            return 1;
+        }
+    }
+}
+----------------------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Listeler
+{
+    public static class Databases
+    {
+        public static List<Musteri> musteriler { get; set; }
+        static Databases()
+        {
+            musteriler = new List<Musteri>();
+        }
+    }
+}
+------------------------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Listeler
+{
+    public class Musteri
+    {
+        public Guid Id { get; set; }
+        public string isim { get; set; }
+        public string soyad { get; set; }
+        public string email { get; set; }
+        public string telefon { get; set; }
+    }
+}
