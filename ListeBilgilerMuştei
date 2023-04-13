@@ -1,3 +1,4 @@
+//bilgiler.cs
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+                                       
 namespace Listeler
 {
     public partial class Bilgiler : Form
@@ -80,6 +81,8 @@ namespace Listeler
     }
 }
 ----------------------------------------------------------------
+
+//Databases.cs
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -98,6 +101,7 @@ namespace Listeler
     }
 }
 ------------------------------------------------------------------
+//Musteri.cs
 using System;
 using System.Collections.Generic;
 using System.Linq;
