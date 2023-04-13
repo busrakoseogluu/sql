@@ -1,0 +1,58 @@
+namespace Elemanlar
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+        String renk = "boş";
+        private void buttonKirmizi_Click(object sender, EventArgs e)
+        {
+            this.BackColor = Color.Red;
+            renk = buttonKirmizi.Text;
+        }
+
+        private void buttonMavi_Click(object sender, EventArgs e)
+        {
+            this.BackColor = Color.Blue;
+            renk = buttonMavi.Text;
+        }
+
+        private void buttonYesil_Click(object sender, EventArgs e)
+        {
+            this.BackColor = Color.Green;
+            renk = buttonYesil.Text;
+        }
+
+        private void buttonSari_Click(object sender, EventArgs e)
+        {
+            this.BackColor = Color.Yellow;
+            renk = buttonSari.Text;
+        }
+
+        private void buttonRastgele_Click(object sender, EventArgs e)
+        {
+            Color color = RastgeleRenk();
+            this.BackColor = color;
+            buttonRastgele.BackColor = color;
+            renk = buttonRastgele.Text;
+        }
+
+        private void buttonDigerForm_Click(object sender, EventArgs e)
+        {
+            VeriGoruntule veriGoruntule = new VeriGoruntule(renk);
+            veriGoruntule.Show();
+            this.Hide();
+        }
+        Color RastgeleRenk()
+        {
+            Random random = new Random();
+            int red = random.Next(0, 255);
+            int green = random.Next(0, 255);
+            int blue = random.Next(0, 255);
+            Color color = Color.FromArgb(red, green, blue);
+            return color;
+        }
+    }
+}
