@@ -10,203 +10,113 @@ using System.Windows.Forms;
 using static System.Windows.Forms.DataFormats;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
+
 namespace AnketOdev2
 {
- 
-public partial class Form1 : Form
- 
-{
- 
- 
-public Form1()
- 
-{
- 
-InitializeComponent();
- 
-}
- 
-private void Form1_Load(object sender, EventArgs e)
- 
-{
- 
-}
- 
-private void button1_Click(object sender, EventArgs e)
- 
-{
- 
-string ad,cinsiyet="",Soru1="",Soru2="",Soru3="",dil="";
- 
-ad=textBox1.Text;
- 
-if (checkBox1.Checked)
- 
-dil += "Türkçe";
- 
-if (checkBox2.Checked)
- 
-dil += "Ýngilizce";
- 
-if (checkBox3.Checked)
- 
-dil += "Almanca";
- 
-if (checkBox4.Checked)
- 
-dil += "Ýspanyolca";
- 
-if (checkBox5.Checked)
- 
-dil += "Diðer";
- 
-if (radioButton1.Checked)
- 
-{
- 
-cinsiyet = "Erkek";
- 
-}
- 
-if (radioButton2.Checked)
- 
-{
- 
-cinsiyet = "Kýz";
- 
-}
- 
-if (radioButton3.Checked)
- 
-{
- 
-Soru1 = "Çok Ýyi";
- 
-}
- 
-if (radioButton4.Checked)
- 
-{
- 
-Soru1 = "Ýyi";
- 
-}
- 
-if (radioButton5.Checked)
- 
-{
- 
-Soru1 = "Orta";
- 
-}
- 
-if (radioButton6.Checked)
- 
-{
- 
-Soru1 = "Kötü";
- 
-}
- 
-if (radioButton7.Checked)
- 
-{
- 
-Soru1 = "Çok Kötü";
- 
-}
- 
-if (radioButton8.Checked)
- 
-{
- 
-Soru2 = "Çok Ýyi";
- 
-}
- 
-if (radioButton9.Checked)
- 
-{
- 
-Soru2 = "Ýyi";
- 
-}
- 
-if (radioButton10.Checked)
- 
-{
- 
-Soru2 = "Orta";
- 
-}
- 
-if (radioButton11.Checked)
- 
-{
- 
-Soru2 = "Kötü";
- 
-}
- 
-if (radioButton12.Checked)
- 
-{
- 
-Soru2 = "Çok Kötü";
- 
-}
- 
-if (radioButton13.Checked)
- 
-{
- 
-Soru3 = "Çok Ýyi";
- 
-}
- 
-if (radioButton14.Checked)
- 
-{
- 
-Soru3 = "Ýyi";
- 
-}
- 
-if (radioButton15.Checked)
- 
-{
- 
-Soru3 = "Orta";
- 
-}
- 
-if (radioButton16.Checked)
- 
-{
- 
-Soru3 = "Kötü";
- 
-}
- 
-if (radioButton17.Checked)
- 
-{
- 
-Soru3 = "Çok Kötü";
- 
-}
- 
-MessageBox.Show("Ad-Soyad : " + ad + "" + "\nCinsiyet : " + cinsiyet+""+
- 
-"\nSoru1 : " +Soru1+""+"\nSoru2:"+Soru2+""+"\nSoru3: " + Soru3 +""+"\nBildiði Diller : " + dil );
- 
-}
- 
- 
-private void radioButton13_CheckedChanged(object sender, EventArgs e)
- 
-{
- 
-}
- 
+    public partial class Form1 : Form
+    {
+        
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string ad,cinsiyet="",Soru1="",Soru2="",Soru3="",dil="";
+            ad=textBox1.Text;
+
+            if (checkBox1.Checked)
+                dil += "Türkçe";
+            if (checkBox2.Checked)
+                dil += "İngilizce";
+            if (checkBox3.Checked)
+                dil += "Almanca";
+            if (checkBox4.Checked)
+                dil += "İspanyolca";
+            if (checkBox5.Checked)
+                dil += "Diğer";
+
+            if (radioButton1.Checked)
+            {
+                cinsiyet = "Erkek";
+            }
+            if (radioButton2.Checked)
+            {
+                cinsiyet = "Kız";
+            }
+            if (radioButton3.Checked)
+            {
+                Soru1 = "Çok İyi";
+            }
+            if (radioButton4.Checked)
+            {
+                Soru1 = "İyi";
+            }
+            if (radioButton5.Checked)
+            {
+                Soru1 = "Orta";
+            }
+            if (radioButton6.Checked)
+            {
+                Soru1 = "Kötü";
+            }
+            if (radioButton7.Checked)
+            {
+                Soru1 = "Çok Kötü";
+            }
+            if (radioButton8.Checked)
+            {
+                Soru2 = "Çok İyi";
+            }
+            if (radioButton9.Checked)
+            {
+                Soru2 = "İyi";
+            }
+            if (radioButton10.Checked)
+            {
+                Soru2 = "Orta";
+            }
+            if (radioButton11.Checked)
+            {
+                Soru2 = "Kötü";
+            }
+            if (radioButton12.Checked)
+            {
+                Soru2 = "Çok Kötü";
+            }
+            if (radioButton13.Checked)
+            {
+                Soru3 = "Çok İyi";
+            }
+            if (radioButton14.Checked)
+            {
+                Soru3 = "İyi";
+            }
+            if (radioButton15.Checked)
+            {
+                Soru3 = "Orta";
+            }
+            if (radioButton16.Checked)
+            {
+                Soru3 = "Kötü";
+            }
+            if (radioButton17.Checked)
+            {
+                Soru3 = "Çok Kötü";
+            }
+            MessageBox.Show("Ad-Soyad : " + ad + "" + "\nCinsiyet : " + cinsiyet+""+
+           "\nSoru1 : " +Soru1+""+"\nSoru2:"+Soru2+""+"\nSoru3: " + Soru3  +""+"\nBildiği Diller : " +  dil  );
+        }
+        
+        private void radioButton13_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+    }
 }
